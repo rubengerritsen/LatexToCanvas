@@ -49,8 +49,7 @@ def highlightCode(code, language='python', style='default'):
                               noclasses=True,
                               cssclass='',
                               cssstyles= get_default_style(),
-                              nobackground=True,
-                              wrapcode="code"
+                              nobackground=True
                               )
     html = highlight(code, get_lexer_by_name(lexer), formatter)
     return html
