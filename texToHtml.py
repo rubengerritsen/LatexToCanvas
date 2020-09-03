@@ -96,7 +96,7 @@ def runPandoc(inputFile, outputFile="output.html"):
     for filter in options["filters"]:
       args.append(f"--filter={filter}")
 
-    args.append(f"-o {outputFile}")
+    args.append(f"--output={outputFile}")
     args.append(inputFile)
     # run pandocs
     print(f"Processing: {inputFile}")
