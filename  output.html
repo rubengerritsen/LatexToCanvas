@@ -1,0 +1,238 @@
+<div style="max-width: 900px;">
+<hr/>
+<h1 class="title">Contents</h1>
+<nav id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#what-it-can-do">What It Can Do</a>
+<ul>
+<li><a href="#math-and-equations">Math and Equations</a></li>
+<li><a href="#code-blocks">Code blocks</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#images-what-it-cannot-do">Images (what it cannot do)</a></li>
+<li><a href="#citations">Citations</a></li>
+<li><a href="#links-to-websites">Links To Websites</a></li>
+<li><a href="#references-to-equations-and-tables">References to Equations and Tables</a></li>
+</ul></li>
+<li><a href="#setup-and-usage">Setup and Usage</a>
+<ul>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#files">Files</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#control-over-the-output-options">Control Over The Output (Options)</a></li>
+</ul></li>
+<li><a href="#how-it-works">How It Works</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+</nav>
+<hr/>
+<h1 id="introduction">Introduction</h1>
+<p>This is a small demo document that shows how LaTeX can be used as a basis for Canvas pages (and plain HTML pages in general). Using <code>pandoc</code> with the appropriate filters, we can get much of the LaTeX functionality to plain HTML. This HTML can then be copy pasted in the Canvas HTML editor to form the basis of a page. Some of the main features are</p>
+<ul>
+<li><p>Equation numbering and referencing,</p></li>
+<li><p>Citations via .bib files and the <code>\cite{}</code> command</p></li>
+<li><p>Highlighted code (without the need of additional CSS)</p></li>
+<li><p>and more …</p></li>
+</ul>
+<p>There are two parts to this document. Firstly we show what the tool can do and secondly we show how to setup and use the tool.</p>
+<h1 id="what-it-can-do">What It Can Do</h1>
+<h2 id="math-and-equations">Math and Equations</h2>
+<p>In Canvas MathJax is not supported but MathML is. We can use it for inline math equations <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>=</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">a^2+b^2 = c^2</annotation></semantics></math> and also for more complex equations in an equation environment. <span id="millerAbrahams" style="display: inline-block; position: relative; width: 100%;"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left"><msub><mi>v</mi><mn>0</mn></msub><mo>exp</mo><mo stretchy="false" form="prefix">(</mo><mo>−</mo><mn>2</mn><mi>α</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>−</mo><mfrac><mrow><msub><mi>E</mi><mi>j</mi></msub><mo>−</mo><msub><mi>E</mi><mi>i</mi></msub></mrow><mrow><msub><mi>k</mi><mi>B</mi></msub><mi>T</mi></mrow></mfrac><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left"><msub><mi>E</mi><mi>j</mi></msub><mo>−</mo><msub><mi>E</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn></mtd></mtr><mtr><mtd columnalign="left"><msub><mi>v</mi><mn>0</mn></msub><mo>exp</mo><mo stretchy="false" form="prefix">(</mo><mo>−</mo><mn>2</mn><mi>α</mi><msub><mi>R</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left"><msub><mi>E</mi><mi>j</mi></msub><mo>−</mo><msub><mi>E</mi><mi>i</mi></msub><mo>≤</mo><mn>0</mn></mtd></mtr></mtable></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">v_{ij}=
+    \begin{cases} 
+    v_0 \exp(-2\alpha R_{ij} - \frac{E_j - E_i}{k_B T}) &amp;  E_j-E_i &gt; 0\\
+    v_0 \exp(-2\alpha R_{ij}) &amp; E_j-E_i \leq 0
+    \end{cases}, \label{millerAbrahams}</annotation></semantics></math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(1)</span></span> The nice thing is that we can reference equations as well, e.g. equation <a href="#millerAbrahams" data-reference-type="ref" data-reference="millerAbrahams">(1)</a>, it is even a link to the equation (click this one for example <a href="#anotherLabel" data-reference-type="ref" data-reference="anotherLabel">(3)</a>). Now we add a few more equations just to show off the automatic equation numbering. <span id="eq:electronME" style="display: inline-block; position: relative; width: 100%;"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right"><mfrac><mrow><mi>d</mi><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow></munder><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><msub><mi>v</mi><mrow><mi>i</mi><mi>j</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>j</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>p</mi><mrow><mi>j</mi><mo>,</mo><mi>e</mi></mrow></msub><msub><mi>v</mi><mrow><mi>j</mi><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mfrac><mrow><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub></mrow><mi>τ</mi></mfrac><mo>+</mo><msub><mi>c</mi><mi>i</mi></msub><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><mi>τ</mi></mfrac><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right"><mfrac><mrow><mi>d</mi><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow></munder><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><msub><mi>v</mi><mrow><mi>i</mi><mi>j</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>j</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>p</mi><mrow><mi>j</mi><mo>,</mo><mi>h</mi></mrow></msub><msub><mi>v</mi><mrow><mi>j</mi><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mfrac><mrow><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub></mrow><mi>τ</mi></mfrac><mo>+</mo><msub><mi>c</mi><mi>i</mi></msub><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><mi>τ</mi></mfrac><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+    \frac{dp_{i,e}}{dt} = \sum_{j\neq i} \left[ -p_{i,e} v_{ij,e} (1-p_{j,e}) + p_{j,e} v_{ji,e}  (1-p_{i,e}) \right] - \frac{p_{i,e}p_{i,h}}{\tau} + c_i\frac{(1-p_{i,e})(1-p_{i,h})}{\tau}, \label{eq:electronME} \\
+    \frac{dp_{i,h}}{dt} = \sum_{j\neq i} \left[ -p_{i,h} v_{ij,h} (1-p_{j,h}) + p_{j,h} v_{ji,h}  (1-p_{i,h}) \right] - \frac{p_{i,e}p_{i,h}}{\tau} + c_i\frac{(1-p_{i,e})(1-p_{i,h})}{\tau}.
+    \end{aligned}</annotation></semantics></math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(2)</span></span> Think of some original text here. <span id="anotherLabel" style="display: inline-block; position: relative; width: 100%;"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mi>i</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><msub><mi>p</mi><mrow><mi>j</mi><mo>,</mo><mi>h</mi></mrow></msub></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>E</mi><mrow><mi>i</mi><mo>,</mo><mi>h</mi></mrow></msub><mo>−</mo><msub><mi>E</mi><mrow><mi>i</mi><mo>,</mo><mi>e</mi></mrow></msub></mrow><mrow><msub><mi>k</mi><mi>B</mi></msub><mi>T</mi></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">c_i = \frac{p_{i,e}p_{j,h}}{(1-p_{i,e})(1-p_{i,h})} = \exp\left(\frac{E_{i,h} - E_{i,e}}{k_B T}\right). \label{anotherLabel}</annotation></semantics></math><span style="position: absolute; right: 0em; top: 50%; line-height: 0; ">(3)</span></span></p>
+<h2 id="code-blocks">Code blocks</h2>
+<p>While talking about programming and code it is often useful to show the code. If we for example want to talk about the function <code>twoBodyForce(xyzs,bonds,Kb,r0)</code> we can do so. If we want to show larger pieces of code, we can add it as a listing. There is (for as far as I know) no syntax highlighting in Canvas, which is annoying. Luckily using an extra filter we can generate highlighted code for almost all languages in plain HTML (no CSS needed) from a <code>lstlisting</code> environment.</p>
+<div><pre style="line-height: 125%"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">twoBodyForce</span>(xyzs,bonds,Kb,r0):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Calculates &#39;two body&#39;-force for every bond in &#39;bonds&#39;. &quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Calculate difference vector and distances</span>
+    <span style="color: #008000; font-weight: bold">global</span> dimMAX
+    dr <span style="color: #666666">=</span> xyzs[bonds[:,<span style="color: #666666">1</span>]] <span style="color: #666666">-</span> xyzs[bonds[:,<span style="color: #666666">0</span>]]
+    dr <span style="color: #666666">=</span> dr <span style="color: #666666">-</span> np<span style="color: #666666">.</span>floor(dr<span style="color: #666666">/</span>dimMAX <span style="color: #666666">+</span> <span style="color: #666666">0.5</span>)<span style="color: #666666">*</span>dimMAX <span style="color: #408080; font-style: italic">#correction for PBC</span>
+    distAt <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linalg<span style="color: #666666">.</span>norm(dr,axis <span style="color: #666666">=</span> <span style="color: #666666">1</span>)
+    <span style="color: #408080; font-style: italic"># Calculate Potential Energy</span>
+    pEnergy <span style="color: #666666">=</span> <span style="color: #008000">sum</span>(<span style="color: #666666">0.5*</span>Kb<span style="color: #666666">*</span>(distAt <span style="color: #666666">-</span>r0)<span style="color: #666666">**2</span>)
+    <span style="color: #408080; font-style: italic"># Calculate forces</span>
+    forces <span style="color: #666666">=</span> (Kb<span style="color: #666666">*</span>(distAt<span style="color: #666666">-</span>r0)<span style="color: #666666">/</span>distAt)[:,np<span style="color: #666666">.</span>newaxis]<span style="color: #666666">*</span>dr
+    <span style="color: #408080; font-style: italic"># Assign forces to right atom</span>
+    tForce <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(xyzs),<span style="color: #666666">3</span>))
+    np<span style="color: #666666">.</span>add<span style="color: #666666">.</span>at(tForce,bonds[:,<span style="color: #666666">0</span>],forces) <span style="color: #408080; font-style: italic">#NB. this is elementwise addiditon UNBUFFERED</span>
+    np<span style="color: #666666">.</span>add<span style="color: #666666">.</span>at(tForce,bonds[:,<span style="color: #666666">1</span>],<span style="color: #666666">-</span>forces) <span style="color: #408080; font-style: italic">#NB. this is elementwise addiditon UNBUFFERED</span>
+    <span style="color: #008000; font-weight: bold">return</span>(tForce,pEnergy)
+</pre></div>
+
+<h2 id="lists">Lists</h2>
+<p>An example of an enumeration.</p>
+<ol>
+<li><p>List item 1</p></li>
+<li><p>List item 2</p></li>
+<li><p>And more list items …</p></li>
+</ol>
+<h2 id="tables">Tables</h2>
+<p>An example table can be found in Table <a href="#summary" data-reference-type="ref" data-reference="summary">1</a>. It is not perfect but very readable.</p>
+<div id="summary">
+<table>
+<caption>Summary of some simulation parameters.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Default Value</th>
+<th style="text-align: center;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mi>s</mi></msub><annotation encoding="application/x-tex">N_s</annotation></semantics></math></td>
+<td style="text-align: center;">Number of sites</td>
+<td style="text-align: center;">512</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math></td>
+<td style="text-align: center;">Number of simulated hops</td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>⋅</mo><msup><mn>10</mn><mn>6</mn></msup></mrow><annotation encoding="application/x-tex">2\cdot 10^6</annotation></semantics></math></td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">v_{ij}</annotation></semantics></math></td>
+<td style="text-align: center;">Hopping rate</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math></td>
+<td style="text-align: center;">Attempt to escape frequency</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></td>
+<td style="text-align: center;">Inverse localization length</td>
+<td style="text-align: center;">0.15</td>
+<td style="text-align: center;">nm<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>B</mi></msub><mi>T</mi></mrow><annotation encoding="application/x-tex">k_B T</annotation></semantics></math></td>
+<td style="text-align: center;">Thermal energy in system</td>
+<td style="text-align: center;">0.026</td>
+<td style="text-align: center;">eV</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>c</mi></msub><annotation encoding="application/x-tex">r_{c}</annotation></semantics></math></td>
+<td style="text-align: center;">Cut-off distance for determining neighbours</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">nm</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">p_{ij}</annotation></semantics></math></td>
+<td style="text-align: center;">Transition probability from state <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>→</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i\rightarrow j</annotation></semantics></math>.</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">S(i)</annotation></semantics></math></td>
+<td style="text-align: center;">Set of neighbours of site <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>i</mi></msub><annotation encoding="application/x-tex">E_i</annotation></semantics></math></td>
+<td style="text-align: center;">Energy of site/state <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">eV</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">R_{ij}</annotation></semantics></math></td>
+<td style="text-align: center;">Distance between site <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">nm</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math></td>
+<td style="text-align: center;">Mean of the Gaussian DOS</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">eV</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></td>
+<td style="text-align: center;">Standard deviation of the Gaussian DOS</td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msub><mi>k</mi><mi>B</mi></msub><mi>T</mi></mrow><annotation encoding="application/x-tex">2k_B T</annotation></semantics></math></td>
+<td style="text-align: center;">eV</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math></td>
+<td style="text-align: center;">Electron charge</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">{e}</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math></td>
+<td style="text-align: center;">Electric field strength</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="images-what-it-cannot-do">Images (what it cannot do)</h2>
+<p>Adding images is a bit more complex because we need to have the correct relative path to the image. Which we cannot know up front, since Canvas generates some number as the identifier for the image. Hence we cannot do anything for images, but do not despair, this is the only moment where it is a pleasure to use the <code>rich content editor</code> of Canvas to drag and drop images in place (after you have copy pasted the HTML).</p>
+<h2 id="citations">Citations</h2>
+<p>Adding citations can be done in the normal LaTeX way, for example here is a reference to the Born Oppenheimer paper about their famous approximation <span class="citation" data-cites="Born1927">(Born and Oppenheimer 1927)</span>. If we provide the right bibliography file the references are automatically added to the end of the HTML file.</p>
+<h2 id="links-to-websites">Links To Websites</h2>
+<p>Using the command <code>\href{https://pandoc.org/installing.html}{Pandoc}</code> we can link to the install page of <a href="https://pandoc.org/installing.html">Pandoc</a>.</p>
+<h2 id="references-to-equations-and-tables">References to Equations and Tables</h2>
+<p>References to the tables work (e.g. Table <a href="#summary" data-reference-type="ref" data-reference="summary">1</a>) and equation references work as well (e.g. Equation <a href="#millerAbrahams" data-reference-type="ref" data-reference="millerAbrahams">(1)</a>).</p>
+<h1 id="setup-and-usage">Setup and Usage</h1>
+<p>All the source files for the tool can be downloaded from <a href="https://pandoc.org/installing.html">GitHub</a>, including the file to generate this page.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The tool is made in python and based around pandoc, hence a working python version is necessary. Pandoc can be installed via this <a href="https://pandoc.org/installing.html">link</a>, there is an installer, but also instructions for how to do it via the command line.</p>
+<p>The syntax highlighting and equation numbering depend on two other python packages <code>pandocfilters</code> and <code>pygments</code>. They can be installed with <code>pip3 install &lt;package_name&gt;</code></p>
+<h2 id="files">Files</h2>
+<p>Every pandoc filter and template has its own file, these files should be accessible to the program while running. The easiest way to achieve this is by putting them in the working directory. The files needed are</p>
+<ul>
+<li><p><code>highlightCode.py</code> provides syntax highlighting</p></li>
+<li><p><code>addEquationNumbers.py</code> provides equation numbers</p></li>
+<li><p><code>canvasTemplate.html</code> provides a template for the page we generate. In the example template I have used it to set the width of the page to 900 pixels.</p></li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>To use the tool, simply run the <code>texToHtml.py</code> file with as input parameter the .tex file and optionally the name of the output file. On Linux</p>
+<div><pre style="line-height: 125%"><span></span>./texToHtml.py &lt;input&gt;.tex
+</pre></div>
+
+<p>or</p>
+<div><pre style="line-height: 125%"><span></span>./texToHtml.py &lt;input&gt;.tex &lt;output&gt;.html
+</pre></div>
+
+<p>If no output file is provide it will put the output in <code>output.html</code>.</p>
+<h2 id="control-over-the-output-options">Control Over The Output (Options)</h2>
+<p>There are multiple ways to control the generated output. For starters we can change options in the <code>texToHtml.py</code> file (they are at the top of the file). Available options are</p>
+<ul>
+<li><p><code>sectionNr</code> if True sections will be numbered,</p></li>
+<li><p><code>TOC</code> if True a table of contents will be added,</p></li>
+<li><p><code>TOC_depth</code> sets toc depth,</p></li>
+<li><p><code>pathToBib</code> sets the path to a bibliography (.bib) file,</p></li>
+<li><p><code>template</code> sets which template to use and</p></li>
+<li><p><code>filters</code> additional filters can be added here.</p></li>
+</ul>
+<p>The colorscheme used for syntax highlighting can be set in the <code>highlighCode.py</code> file. Simply change the style variable to whatever style you want. As long as the style is recognized by pygments it will work.</p>
+<p>Finally the page layout can be set by changing the template file.</p>
+<h1 id="how-it-works">How It Works</h1>
+<p>This tool is nothing but a python wrapper around <a href="https://pandoc.org">pandoc</a> with some additional filters for equation numbering and syntax highlighting. The actual command that is used looks something like this</p>
+<div><pre style="line-height: 125%"><span></span>pandoc --toc --toc-depth<span style="color: #666666">=2</span> --filter highlightCode.py --filter addEquationNumbers.py --mathml --standalone --bibliography<span style="color: #666666">=</span>&lt;path/to/bib&gt; --template canvasTemplate.html -f latex -t html input.tex -o output.html
+</pre></div>
+
+<p>All source files are well documented, have a look at those if you want a deeper understanding of what is going on.</p>
+<h1 class="unnumbered" id="bibliography">Bibliography</h1>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-Born1927">
+<p>Born, M, and R Oppenheimer. 1927. “Zur Quantentheorie Der Molekeln.” <em>Annalen Der Physik</em> 84.</p>
+</div>
+</div>
+<hr/>
+</div>

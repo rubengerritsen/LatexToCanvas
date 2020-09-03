@@ -1,0 +1,187 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+% Page setup (margin's)
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\pagestyle{plain}
+% Maths
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% Floats and figures
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\definecolor{commentsColor}{rgb}{0.497495, 0.497587, 0.497464}
+\definecolor{keywordsColor}{rgb}{0.000000, 0.000000, 0.635294}
+\definecolor{stringColor}{rgb}{0.558215, 0.000000, 0.135316}
+
+\title{some title}
+
+
+\begin{document}
+	
+	\section{Introduction}
+	This is a small demo document that shows how LaTeX can be used as a basis for Canvas pages (and plain HTML pages in general). Using \lstinline|pandoc| with the appropriate filters, we can get much of the LaTeX functionality to plain HTML. This HTML can then be copy pasted in the Canvas HTML editor to form the basis of a page. Some of the main features are
+	\begin{itemize}
+		\item Equation numbering and referencing,
+		\item Citations via .bib files and the \lstinline|\cite{}| command
+		\item Highlighted code (without the need of additional CSS)
+		\item and more \ldots
+	\end{itemize}
+	
+	\noindent
+	There are two parts to this document. Firstly we show what the tool can do and secondly we show how to setup and use the tool.
+	
+	\section{What It Can Do}
+	
+	\subsection{Math and Equations}
+	In Canvas MathJax is not supported but MathML is. We can use it for inline math equations $a^2+b^2 = c^2$ and also for more complex equations in an equation environment.
+	\begin{equation}
+	v_{ij}=
+	\begin{cases} 
+	v_0 \exp(-2\alpha R_{ij} - \frac{E_j - E_i}{k_B T}) &  E_j-E_i > 0\\
+	v_0 \exp(-2\alpha R_{ij}) & E_j-E_i \leq 0
+	\end{cases}, \label{millerAbrahams}
+	\end{equation}
+	The nice thing is that we can reference equations as well, e.g. equation \ref{millerAbrahams}, it is even a link to the equation (click this one for example \ref{anotherLabel}). Now we add a few more equations just to show off the automatic equation numbering.
+	\begin{align}
+	\frac{dp_{i,e}}{dt} = \sum_{j\neq i} \left[ -p_{i,e} v_{ij,e} (1-p_{j,e}) + p_{j,e} v_{ji,e}  (1-p_{i,e}) \right] - \frac{p_{i,e}p_{i,h}}{\tau} + c_i\frac{(1-p_{i,e})(1-p_{i,h})}{\tau}, \label{eq:electronME} \\
+	\frac{dp_{i,h}}{dt} = \sum_{j\neq i} \left[ -p_{i,h} v_{ij,h} (1-p_{j,h}) + p_{j,h} v_{ji,h}  (1-p_{i,h}) \right] - \frac{p_{i,e}p_{i,h}}{\tau} + c_i\frac{(1-p_{i,e})(1-p_{i,h})}{\tau}.
+	\end{align}
+	Think of some original text here.
+	\begin{equation}
+	c_i = \frac{p_{i,e}p_{j,h}}{(1-p_{i,e})(1-p_{i,h})} = \exp\left(\frac{E_{i,h} - E_{i,e}}{k_B T}\right). \label{anotherLabel}
+	\end{equation}
+	
+	
+	\subsection{Code blocks}
+	While talking about programming and code it is often useful to show the code. If we for example want to talk about the function \lstinline{twoBodyForce(xyzs,bonds,Kb,r0)} we can do so. If we want to show larger pieces of code, we can add it as a listing. There is (for as far as I know) no syntax highlighting in Canvas, which is annoying. Luckily using an extra filter we can generate highlighted code for almost all languages in plain HTML (no CSS needed) from a \lstinline{lstlisting} environment.
+	
+% Listings should not be indented, gives strange indent behaviour in HTML
+\begin{lstlisting}[language=python]
+def twoBodyForce(xyzs,bonds,Kb,r0):
+	""" Calculates 'two body'-force for every bond in 'bonds'. """
+	# Calculate difference vector and distances
+	global dimMAX
+	dr = xyzs[bonds[:,1]] - xyzs[bonds[:,0]]
+	dr = dr - np.floor(dr/dimMAX + 0.5)*dimMAX #correction for PBC
+	distAt = np.linalg.norm(dr,axis = 1)
+	# Calculate Potential Energy
+	pEnergy = sum(0.5*Kb*(distAt -r0)**2)
+	# Calculate forces
+	forces = (Kb*(distAt-r0)/distAt)[:,np.newaxis]*dr
+	# Assign forces to right atom
+	tForce = np.zeros((len(xyzs),3))
+	np.add.at(tForce,bonds[:,0],forces) #NB. this is elementwise addiditon UNBUFFERED
+	np.add.at(tForce,bonds[:,1],-forces) #NB. this is elementwise addiditon UNBUFFERED
+	return(tForce,pEnergy)
+\end{lstlisting}
+	
+	\subsection{Lists}
+	An example of an enumeration.
+	\begin{enumerate}
+		\item List item 1 
+		\item List item 2
+		\item And more list items \ldots
+	\end{enumerate}
+	
+	\subsection{Tables}
+	An example table can be found in Table \ref{summary}. It is not perfect but very readable.
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{c|c|c|c }
+			\hline \hline
+			Name & Description &  Default Value & Unit \\ \hline
+			$N_s$ & Number of sites & 512 & - \\
+			$T$ & Number of simulated hops & $2\cdot 10^6$ & - \\
+			$v_{ij}$ & Hopping rate & - & - \\
+			$v_0$ & Attempt to escape frequency & 1 & -  \\
+			$\alpha$ & Inverse localization length  & 0.15 & nm$^{-1}$  \\
+			$k_B T$ & Thermal energy in system & 0.026 & eV \\
+			$r_{c}$ & Cut-off distance for determining neighbours & 20 & nm \\
+			$p_{ij}$ & Transition probability from state $i\rightarrow j$. & - & -\\
+			$S(i)$ & Set of neighbours of site $i$ & - &- \\
+			$E_i$ & Energy of site/state $i$ & - & eV \\
+			$R_{ij}$ & Distance between site $i$ and $j$ & - & nm \\
+			$\mu$ & Mean of the Gaussian DOS & 1.5 & eV \\
+			$\sigma$ & Standard deviation of the Gaussian DOS & $2k_B T$ & eV \\
+			$e$ & Electron charge & 1 & ${e}$ \\
+			$F$ & Electric field strength & - & \\
+			\hline
+		\end{tabular}
+		\caption{Summary of some simulation parameters.}\label{summary}
+	\end{table}
+	
+	\subsection{Images (what it cannot do)}
+	Adding images is a bit more complex because we need to have the correct relative path to the image. Which we cannot know up front, since Canvas generates some number as the identifier for the image. Hence we cannot do anything for images, but do not despair,  this is the only moment where it is a pleasure to use the \lstinline{rich content editor} of Canvas to drag and drop images in place (after you have copy pasted the HTML).
+	
+	\subsection{Citations}
+	Adding citations can be done in the normal LaTeX way, for example here is a reference to the Born Oppenheimer paper about their famous approximation \cite{Born1927}. If we provide the right bibliography file the references are automatically added to the end of the HTML file.
+	
+	\subsection{Links To Websites}
+	Using the command \lstinline|\href{https://pandoc.org/installing.html}{Pandoc}| we can link to the install page of \href{https://pandoc.org/installing.html}{Pandoc}.
+	
+	\subsection{References to Equations and Tables}
+	References to the tables work (e.g. Table \ref{summary}) and equation references work as well (e.g. Equation \ref{millerAbrahams}).
+	
+	\section{Setup and Usage}
+	All the source files for the tool can be downloaded from \href{https://pandoc.org/installing.html}{GitHub}, including the file to generate this page.
+	
+	\subsection{Dependencies}
+	The tool is made in python and based around pandoc, hence a working python version is necessary. Pandoc can be installed via this \href{https://pandoc.org/installing.html}{link}, there is an installer, but also instructions for how to do it via the command line.
+	
+	The syntax highlighting and equation numbering depend on two other python packages \lstinline{pandocfilters} and \lstinline{pygments}. They can be installed with \lstinline|pip3 install <package_name>|
+	
+	\subsection{Files}
+	Every pandoc filter and template has its own file, these files should be accessible to the program while running. The easiest way to achieve this is by putting them in the working directory. The files needed are
+	
+	\begin{itemize}
+		\item \lstinline|highlightCode.py| provides syntax highlighting
+		\item \lstinline|addEquationNumbers.py| provides equation numbers
+		\item \lstinline|canvasTemplate.html| provides a template for the page we generate. In the example template I have used it to set the width of the page to 900 pixels.
+	\end{itemize}
+
+	\subsection{Usage}
+	To use the tool, simply run the \lstinline|texToHtml.py| file with as input parameter the .tex file and optionally the name of the output file. On Linux
+	\begin{lstlisting}[language=bash]
+	./texToHtml.py <input>.tex
+	\end{lstlisting}
+	or
+	\begin{lstlisting}[language=bash]
+	./texToHtml.py <input>.tex <output>.html
+	\end{lstlisting} 
+	If no output file is provide it will put the output in \lstinline|output.html|.
+	
+	\subsection{Control Over The Output (Options)}
+	There are multiple ways to control the generated output. For starters we can change options in the \lstinline|texToHtml.py| file (they are at the top of the file). Available options are
+	\begin{itemize}
+		\item \lstinline|sectionNr| if True sections will be numbered,
+		\item \lstinline|TOC| if True a table of contents will be added,
+		\item \lstinline|TOC_depth| sets toc depth,
+		\item \lstinline|pathToBib| sets the path to a bibliography (.bib) file,
+		\item \lstinline|template| sets which template to use and
+		\item \lstinline|filters| additional filters can be added here.
+	\end{itemize}
+
+	The colorscheme used for syntax highlighting can be set in the \lstinline|highlighCode.py| file. Simply change the style variable to whatever style you want. As long as the style is recognized by pygments it will work.
+	
+	Finally the page layout can be set by changing the template file.
+	
+	\section{How It Works}
+	This tool is nothing but a python wrapper around \href{https://pandoc.org}{pandoc} with some additional filters for equation numbering and syntax highlighting. The actual command that is used looks something like this
+	\begin{lstlisting}[language=bash]
+	pandoc --toc --toc-depth=2 --filter highlightCode.py --filter addEquationNumbers.py --mathml --standalone --bibliography=<path/to/bib> --template canvasTemplate.html -f latex -t html input.tex -o output.html
+	\end{lstlisting}
+	All source files are well documented, have a look at those if you want a deeper understanding of what is going on.
+	
+	
+	
+	\section{Bibliography}
+	\bibliographystyle{ieeetr}
+	\bibliography{/home/ruben/Documents/lib2.bib}
+	
+\end{document}

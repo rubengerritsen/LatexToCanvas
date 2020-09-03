@@ -1,0 +1,15 @@
+<div style="max-width: 900px;">
+$if(toc)$
+<hr/>
+<h1 class="title">Contents</h1>
+<nav id="$idprefix$TOC">
+$table-of-contents$
+</nav>
+<hr/>
+$endif$
+$body$
+<hr/>
+$for(include-after)$
+$include-after$
+$endfor$
+</div>
