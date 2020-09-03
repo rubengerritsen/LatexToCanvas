@@ -23,10 +23,20 @@ This will create a html page called `output.html`, the contents of this file can
 ### Example output (page fragment)
 ![](example.png)
 
-# Dependencies
+# Dependencies and Install
 The tool is made in python and based around pandoc, hence a working python version is necessary. Pandoc can be installed via this [link](https://pandoc.org/installing.html), there is an installer, but also instructions for how to do it via the command line.
 	
 The syntax highlighting and equation numbering depend on two other python packages `pandocfilters` and `pygments`. They can be installed with `pip3 install <package_name>`
+
+### For Windows Users
+Start off by installing [pandoc](https://pandoc.org/installing.html). Just follow the installer instructions.
+
+Next open a powershell, type `python` and press enter. If python is installed it will open and you can exit again, type `exit()` followed by an enter. If python is not installed it will lead you to the microsoft store where you can get/download it, press the button and let windows do the rest. 
+
+Now that we have python installed return to the powershell and type `pip3 install pandocfilters` press enter and repeat for `pip3 install pygments`.
+
+Next navigate (in powershell with `cd`) to the folder where the files of this repository are and type `python3 texToHtml.py input.tex` and press enter. An html file called `output.html` is now created copy paste it in the HTML editor of a Canvas page and that is all.
+
 
 ## Files
 Every pandoc filter and template has its own file, these files should be accessible to the program while running. The easiest way to achieve this is by putting them in the working directory. The files needed are	
