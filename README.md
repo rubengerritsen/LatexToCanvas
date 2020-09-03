@@ -1,4 +1,4 @@
-# LatexToCanvas
+# Latex To Canvas LMS Pages
 This tool helps to convert LaTeX (.tex) files to plain HTML that can be used as a basis for pages in Canvas LMS.
 
 The two main features are 
@@ -15,7 +15,7 @@ The tool is made to be as easy as possible, to see what it can do run
 
 This will create a html page called `output.html`, the contents of this file can be copy pasted in the HTML editor of a Canvas page or viewed in a browser (NB in the last case not all features might work). The generated page will give a more detailed explanation of what the tool can do and how to customize the output.
 
-### Example output
+### Example output (page fragment)
 ![](example.png)
 
 # Dependencies
