@@ -6,7 +6,7 @@ import shutil
 
 options = {
     ######## USER INPUT #########
-    "sectionNr": False,
+    "sectionNr": True,
     "TOC": True,
     "TOC_depth": 2,
     "pathToBib": "lib2.bib",
@@ -20,7 +20,7 @@ options = {
 def helpMessage():
     return ("""
   OVERVIEW:
-  This tool helps to convert LaTeX (.tex) files to plain HTML
+  This tool helps to convert LaTeX (.tex) files to plain HTML.
   It supports syntax highlighting for code blocks (lstlisting),
   equation numbers and links to equations. It provides these 
   functions in plain HTML, so no CSS or external sources are needed.
