@@ -1,11 +1,14 @@
-# Latex To Canvas LMS Pages
+# Latex (and Markdown) To Canvas LMS Pages
 This tool converts LaTeX (.tex) files to plain HTML that can be used as a basis for pages in Canvas LMS.
 
 Some of the features 
 
-* Syntax highlighting for code
+* Syntax highlighting for code (without CSS)
 * Equation numbers and referencing
 * Automatic table of contents
+
+### Markdown 
+If you do not need the equation support the tool can also be applied to markdown files. In this case the tool reduces to `pandoc` with an inplace syntax highlighter, so no additional CSS or HTML head is needed.
 
 # Usage
 The tool is made to be as easy as possible, to see what it can do run
@@ -19,6 +22,12 @@ python3 texToHtml.py input.tex
 ```
 
 This will create a html page called `output.html`, the contents of this file can be copy pasted in the HTML editor of a Canvas page or viewed in a browser (NB in the last case not all features might work). The generated page will give a more detailed explanation of what the tool can do and how to customize the output.
+
+### Markdown usage
+
+```bash
+./texToHtml.py input.md
+```
 
 ### Example output (page fragment)
 ![](example.png)

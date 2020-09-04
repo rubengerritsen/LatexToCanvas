@@ -76,11 +76,18 @@ def helpMessage():
   """)
 
 
-def runPandoc(inputFile, outputFile="output.html"):
+def runPandoc(inputFile, outputFile="output.html", markdown=False):
     global options
 
     #defaults
-    args = ["pandoc", "--mathml", "--standalone", "--from=latex", "--to=html"]
+    args = ["pandoc", "--mathml", "--standalone", "--to=html"]
+
+    # input file format
+    if markdown:
+        args.append("--from=markdown")
+    else:
+        args.append("--from=latex")
+
 
     # Processing options
     if options["sectionNr"]:
@@ -92,9 +99,9 @@ def runPandoc(inputFile, outputFile="output.html"):
     if "pathToBib" in options:
         args.append(f"--bibliography={options['pathToBib']}")
     if "template" in options:
-      args.append(f"--template={options['template']}")
+        args.append(f"--template={options['template']}")
     for filter in options["filters"]:
-      args.append(f"--filter={filter}")
+        args.append(f"--filter={filter}")
 
     args.append(f"--output={outputFile}")
     args.append(inputFile)
@@ -119,6 +126,9 @@ if __name__ == "__main__":
     if len(userOptions) == 2:
         if userOptions[1][-4:] == ".tex":
             runPandoc(userOptions[1])
+        elif userOptions[1][-3:] == ".md":
+            print("Markdown support is experimental.")
+            runPandoc(userOptions[1], markdown=True)
         elif userOptions[1].find("help") != -1:
             print(helpMessage())
         else:
@@ -127,5 +137,8 @@ if __name__ == "__main__":
     if len(userOptions) == 3:
         if userOptions[1][-4:] == ".tex":
             runPandoc(userOptions[1], userOptions[2])
+        elif userOptions[1][-3:] == ".md":
+            print("Markdown support is experimental.")
+            runPandoc(userOptions[1], userOptions[2], markdown=True)
         else:
             print("Only .tex files are supported.")
