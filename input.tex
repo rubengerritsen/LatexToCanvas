@@ -25,7 +25,7 @@
 \begin{document}
 	
 	\section{Introduction}
-	This is a small demo document that shows how LaTeX can be used as a basis for Canvas pages (and plain HTML pages in general). Using \lstinline|pandoc| with the appropriate filters, we can get much of the LaTeX functionality to plain HTML. This HTML can then be copy pasted in the Canvas HTML editor to form the basis of a page. Some of the main features are
+	This is a small demo document that shows how LaTeX (or markdown) can be used as a basis for Canvas pages (and plain HTML pages in general). Using \lstinline|pandoc| with the appropriate filters, we can get much of the LaTeX functionality to plain HTML. This HTML can then be copy pasted in the Canvas HTML editor to form the basis of a page. Some of the main features are
 	\begin{itemize}
 		\item Equation numbering and referencing,
 		\item Citations via .bib files and the \lstinline|\cite{}| command
@@ -59,7 +59,7 @@
 	
 	
 	\subsection{Code blocks}
-	While talking about programming and code it is often useful to show the code. If we for example want to talk about the function \lstinline{twoBodyForce(xyzs,bonds,Kb,r0)} we can do so. If we want to show larger pieces of code, we can add it as a listing. There is (for as far as I know) no syntax highlighting in Canvas, which is annoying. Luckily using an extra filter we can generate highlighted code for almost all languages in plain HTML (no CSS needed) from a \lstinline{lstlisting} environment.
+	While talking about programming and code it is often useful to show the code. If we for example want to talk about the function \lstinline{twoBodyForce(xyzs,bonds,Kb,r0)} we can do so. If we want to show larger pieces of code, we can add it as a listing. There is (for as far as I know) no syntax highlighting in Canvas, which is annoying. Luckily using an extra filter we can generate highlighted code for almost all languages in plain HTML (no CSS needed) from a \lstinline{lstlisting}  environment (TeX) or \lstinline{```<language> code block ```} (markdown).
 	
 % Listings should not be indented, gives strange indent behaviour in HTML
 \begin{lstlisting}[language=python]
@@ -146,18 +146,18 @@ def twoBodyForce(xyzs,bonds,Kb,r0):
 	\end{itemize}
 
 	\subsection{Usage}
-	To use the tool, simply run the \lstinline|texToHtml.py| file with as input parameter the .tex file and optionally the name of the output file. On Linux
+	To use the tool, simply run the \lstinline|textToHtml.py| file with as input parameter the .tex file and optionally the name of the output file. On Linux
 	\begin{lstlisting}[language=bash]
-	./texToHtml.py <input>.tex
+	./textToHtml.py <input>.tex
 	\end{lstlisting}
 	or
 	\begin{lstlisting}[language=bash]
-	./texToHtml.py <input>.tex <output>.html
+	./textToHtml.py <input>.tex <output>.html
 	\end{lstlisting} 
-	If no output file is provide it will put the output in \lstinline|output.html|.
+	If no output file is provided it will put the output in \lstinline|output.html|.
 	
 	\subsection{Control Over The Output (Options)}
-	There are multiple ways to control the generated output. For starters we can change options in the \lstinline|texToHtml.py| file (they are at the top of the file). Available options are
+	There are multiple ways to control the generated output. For starters we can change options in the \lstinline|textToHtml.py| file (they are at the top of the file). Available options are
 	\begin{itemize}
 		\item \lstinline|sectionNr| if True sections will be numbered,
 		\item \lstinline|TOC| if True a table of contents will be added,

@@ -1,24 +1,25 @@
-# Latex (and Markdown) To Canvas LMS Pages
-This tool converts LaTeX (.tex) files to plain HTML that can be used as a basis for pages in Canvas LMS.
+# Latex and Markdown To Canvas LMS Pages
+This tool converts LaTeX (.tex) and Markdown (.md) files to plain HTML that can be used as a basis for pages in Canvas LMS.
 
 Some of the features 
 
 * Syntax highlighting for code (without CSS)
-* Equation numbers and referencing
+* Equation numbers and referencing (for TeX files)
+* Citations via the `\cite{}` command and a .bib file (for TeX files)
 * Automatic table of contents
 
 ### Markdown 
-If you do not need the equation support the tool can also be applied to markdown files. In this case the tool reduces to `pandoc` with an inplace syntax highlighter, so no additional CSS or HTML head is needed.
+If you do not need equation support the tool can also be applied to markdown files. In this case the tool reduces to `pandoc` with an inplace syntax highlighter, so no additional CSS or HTML head is needed.
 
 # Usage
 The tool is made to be as easy as possible, to see what it can do run
 
 ```bash
-./texToHtml.py input.tex
+./textToHtml.py input.tex
 ```
 or on windows
 ```bash
-python3 texToHtml.py input.tex
+python3 textToHtml.py input.tex
 ```
 
 This will create a html page called `output.html`, the contents of this file can be copy pasted in the HTML editor of a Canvas page or viewed in a browser (NB in the last case not all features might work). The generated page will give a more detailed explanation of what the tool can do and how to customize the output.
@@ -26,7 +27,7 @@ This will create a html page called `output.html`, the contents of this file can
 ### Markdown usage
 
 ```bash
-./texToHtml.py input.md
+./textToHtml.py input.md
 ```
 
 ### Example output (page fragment)
@@ -44,7 +45,7 @@ Next open a powershell, type `python` and press enter. If python is installed it
 
 Now that we have python installed return to the powershell and type `pip3 install pandocfilters` press enter and repeat for `pip3 install pygments`.
 
-Next navigate (in powershell with `cd`) to the folder where the files of this repository are and type `python3 texToHtml.py input.tex` and press enter. An html file called `output.html` is now created, copy paste its contents in the HTML editor of a Canvas page and you should now see the example page.
+Next navigate (in powershell with `cd`) to the folder where the files of this repository are and type `python3 textToHtml.py input.tex` and press enter. An html file called `output.html` is now created, copy paste its contents in the HTML editor of a Canvas page and you should now see the example page.
 
 
 ## Files
