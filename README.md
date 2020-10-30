@@ -41,7 +41,7 @@ The syntax highlighting and equation numbering depend on two other python packag
 ### For Windows Users
 Start off by installing [pandoc](https://pandoc.org/installing.html). Just follow the installer instructions.
 
-Next open a powershell, type `python` and press enter. If python is installed it will open and you can exit again, type `exit()` followed by an enter. If python is not installed it will lead you to the microsoft store where you can get/download it, press the button and let windows do the rest. 
+Next open a powershell (windows button + `X`, followed by `I`), type `python3` and press enter. If python is installed it will open and you can exit again, type `exit()` followed by an enter. If python is not installed it will lead you to the microsoft store where you can get/download it, press the button and let windows do the rest. 
 
 Now that we have python installed return to the powershell and type `pip3 install pandocfilters` press enter and repeat for `pip3 install pygments`.
 
