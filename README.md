@@ -45,7 +45,7 @@ Next open a powershell (windows button + `X`, followed by `I`), type `python3` a
 
 Now that we have python installed return to the powershell and type `pip3 install pandocfilters` press enter and repeat for `pip3 install pygments`.
 
-Next navigate (in powershell with `cd`) to the folder where the files of this repository are and type `python3 textToHtml.py input.tex` and press enter. An html file called `output.html` is now created, copy paste its contents in the HTML editor of a Canvas page and you should now see the example page.
+Next navigate (in powershell with `cd`) to the folder where the files of this repository are and type `python3 textToHtml.py input.tex` (if `python3` is not recognized try `python`) and press enter. An html file called `output.html` is now created, copy paste its contents in the HTML editor of a Canvas page and you should now see the example page.
 
 
 ## Files
