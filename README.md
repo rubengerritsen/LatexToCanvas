@@ -19,7 +19,7 @@ The tool is made to be as easy as possible, to see what it can do run
 ```
 or on windows
 ```bash
-python3 textToHtml.py input.tex
+python3 textToHtml.py input.tex #it might be that python3 does not work use python instead
 ```
 
 This will create a html page called `output.html`, the contents of this file can be copy pasted in the HTML editor of a Canvas page or viewed in a browser (NB in the last case not all features might work). The generated page will give a more detailed explanation of what the tool can do and how to customize the output.
